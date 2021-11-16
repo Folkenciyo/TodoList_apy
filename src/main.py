@@ -34,8 +34,9 @@ def sitemap():
 @app.route('/task', methods=['GET'])
 def get_task():
     tasks= Task.get_all()
-    all_tasks=[task.to_dict() for task in tasks]
-    return jsonify(all_tasks), 200
+    if tasks:
+        return jsonify(tasks),200
+    return jsonify({'msg':'Doesnt Exist'}), 404
 
 @app.route('/task/<int:id>', methods=['GET'])
 def get_task_by_id(id):

@@ -16,7 +16,6 @@ class Task(db.Model):
             "id": self.id,
             "item": self.item,
             "done": self.done
-
         }
 
     @classmethod
@@ -32,7 +31,7 @@ class Task(db.Model):
     @classmethod
     def get_all(cls):
         tasks= cls.query.all()
-        return tasks
+        return [task.to_dict() for task in tasks]
 
     def update(self, item):
         self.item=item
